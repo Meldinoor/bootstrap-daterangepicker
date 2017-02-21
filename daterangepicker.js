@@ -3,7 +3,7 @@
 * @author: Dan Grossman http://www.dangrossman.info/
 * @copyright: Copyright (c) 2012-2017 Dan Grossman. All rights reserved.
 * @license: Licensed under the MIT license. See http://www.opensource.org/licenses/mit-license.php
-* @website: http://www.daterangepicker.com/
+* @website: https://www.daterangepicker.com/
 */
 // Follow the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
 (function (root, factory) {
@@ -46,6 +46,10 @@
         this.timePicker24Hour = false;
         this.timePickerIncrement = 1;
         this.timePickerSeconds = false;
+		this.maxFromHour = 24;
+		this.minFromHour = 0;
+		this.maxToHour = 24;
+		this.minToHour = 0;
         this.linkedCalendars = true;
         this.autoUpdateInput = true;
         this.alwaysShowCalendars = false;
@@ -253,6 +257,18 @@
         if (typeof options.timePicker24Hour === 'boolean')
             this.timePicker24Hour = options.timePicker24Hour;
 
+		if (typeof options.maxToHour === 'number')
+			this.maxToHour = options.maxToHour;
+		
+		if (typeof options.minToHour === 'number')
+			this.minToHour = options.minToHour;
+		
+		if (typeof options.maxFromHour === 'number')
+			this.maxFromHour = options.maxFromHour;
+		
+		if (typeof options.minFromHour === 'number')
+			this.minFromHour = options.minFromHour;
+		
         if (typeof options.autoApply === 'boolean')
             this.autoApply = options.autoApply;
 
@@ -910,6 +926,22 @@
             var start = this.timePicker24Hour ? 0 : 1;
             var end = this.timePicker24Hour ? 23 : 12;
 
+			if(side === 'left' && this.timePicker24Hour && this.minFromHour) {
+				start = this.minFromHour;
+			}
+			
+			if(side === 'left' && this.timePicker24Hour && this.maxFromHour) {
+				end = this.maxFromHour;
+			}
+			
+			if(side === 'right' && this.timePicker24Hour && this.minToHour) {
+				start = this.minToHour;
+			}
+			
+			if(side === 'right' && this.timePicker24Hour && this.maxToHour) {
+				end = this.maxToHour;
+			}
+			
             for (var i = start; i <= end; i++) {
                 var i_in_24 = i;
                 if (!this.timePicker24Hour)
