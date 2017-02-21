@@ -1,4 +1,12 @@
-# Date Range Picker for Bootstrap
+# Modified Date Range Picker for Bootstrap
+
+This is a slightly modified fork of Dan Grossman's excellent Bootstrap Date Range Picker. The only change I've made was to add the options:
+minFromHour
+maxFromHour
+minToHour
+maxToHour
+
+These restrict the available hours that can be selected with the timepicker in the left (from) and right (to) timepickers.
 
 ![Improvely.com](http://i.imgur.com/LbAMf3D.png)
 
